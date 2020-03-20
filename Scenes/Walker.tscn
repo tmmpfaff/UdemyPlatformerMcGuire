@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Scripts/WalkerAI.gd" type="Script" id=1]
+[ext_resource path="res://Textures/Enemies/enemyWalking_5.png" type="Texture" id=2]
+[ext_resource path="res://Textures/Enemies/enemyWalking_1.png" type="Texture" id=3]
+[ext_resource path="res://Textures/Enemies/enemyWalking_2.png" type="Texture" id=4]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "Dead",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "Walk",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 23.6454, 18.7156 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 18.6982, 3.83043 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 22.2181, 20.1851 )
+
+[node name="Walker" type="KinematicBody2D"]
+script = ExtResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 1.5, 1.5 )
+frames = SubResource( 1 )
+animation = "Idle"
+
+[node name="PlayerDamage" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDamage"]
+visible = false
+position = Vector2( -0.407814, -0.611717 )
+shape = SubResource( 2 )
+
+[node name="EnemyDamage" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDamage"]
+visible = false
+position = Vector2( -0.81562, -29.9743 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( -0.977684, 13.011 )
+shape = SubResource( 4 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( 24.2649, 0.40781 )
+enabled = true
+cast_to = Vector2( 0, 40 )
+[connection signal="body_entered" from="PlayerDamage" to="." method="_on_PlayerDamage_body_entered"]
+[connection signal="body_entered" from="EnemyDamage" to="." method="_on_EnemyDamage_body_entered"]

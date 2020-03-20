@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Textures/Feltpen.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="DynamicFont" id=1]
+size = 60
+font_data = ExtResource( 1 )
+
+[node name="CanvasLayer_WIN" type="CanvasLayer"]
+
+[node name="PopupDialog" type="PopupDialog" parent="."]
+visible = true
+margin_left = 360.0
+margin_top = 223.0
+margin_right = 1010.0
+margin_bottom = 447.0
+
+[node name="Label" type="Label" parent="PopupDialog"]
+margin_left = 65.2167
+margin_top = 19.3917
+margin_right = 577.217
+margin_bottom = 210.392
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.0980392, 0.945098, 0.0156863, 1 )
+text = "Gewonnen
+"
+align = 1
+valign = 1
